@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوچرخه‌سرا | فروشگاه تخصصی دوچرخه</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Tailwind CSS (preflight disabled to avoid Bootstrap conflict) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: { preflight: false },
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { green: '#2D6A4F', orange: '#F77F00', light: '#B7E4C7' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== STICKY HEADER ===== -->
+<header id="header" class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a href="#home" class="logo">
+                <i class="fas fa-bicycle logo-icon"></i>
+                <span class="logo-text">دوچرخه‌<span class="logo-accent">سرا</span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home"    class="nav-link">خانه</a></li>
+                <li><a href="#products" class="nav-link">فروش</a></li>
+                <li><a href="#services" class="nav-link">خدمات پس از فروش</a></li>
+                <li><a href="#about"   class="nav-link">درباره ما</a></li>
+                <li><a href="#representatives" class="nav-link">نمایندگی‌ها</a></li>
+                <li><a href="#contact" class="nav-link">ارتباط با ما</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-cart" id="cartBtn" aria-label="سبد خرید" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="منو">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+        <div class="hero-badge">
+            <i class="fas fa-star"></i>
+            <span>جدیدترین مدل‌های ۱۴۰۳</span>
+        </div>
+        <h1 class="hero-title">
+            دنیای <span class="text-accent">دوچرخه</span> را
+            <br>با ما تجربه کن
+        </h1>
+        <p class="hero-subtitle">
+            بیش از ۵۰۰ مدل دوچرخه با کیفیت برتر، تحویل سریع و <span class="hero-highlight">ضمانت اصالت کالا</span>
+        </p>
+        <div class="hero-buttons">
+            <a href="#products" class="btn btn-primary">
+                <i class="fas fa-store"></i> مشاهده محصولات
+            </a>
+            <a href="#about" class="btn btn-outline-white">
+                <i class="fas fa-info-circle"></i> درباره ما
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">+۵۰۰</span>
+                <span class="stat-label">مدل محصول</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number">+۱۵</span>
+                <span class="stat-label">سال تجربه</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number">+۱۰۰۰۰</span>
+                <span class="stat-label">مشتری راضی</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number">+۲۰</span>
+                <span class="stat-label">نمایندگی</span>
+            </div>
+        </div>
+    </div>
+    <a href="#products" class="hero-scroll-down">
+        <i class="fas fa-chevron-down"></i>
+    </a>
+</section>
+
+<!-- ===== CATEGORIES SECTION ===== -->
+<section class="categories-section">
+    <div class="container">
+        <div class="categories-flex">
+            <a href="#products" class="category-card" onclick="filterProducts('mountain')">
+                <div class="category-icon"><i class="fas fa-mountain"></i></div>
+                <span class="category-name">کوهستانی</span>
+            </a>
+            <a href="#products" class="category-card" onclick="filterProducts('road')">
+                <div class="category-icon"><i class="fas fa-road"></i></div>
+                <span class="category-name">جاده‌ای</span>
+            </a>
+            <a href="#products" class="category-card" onclick="filterProducts('city')">
+                <div class="category-icon"><i class="fas fa-city"></i></div>
+                <span class="category-name">شهری</span>
+            </a>
+            <a href="#products" class="category-card" onclick="filterProducts('kids')">
+                <div class="category-icon"><i class="fas fa-child"></i></div>
+                <span class="category-name">کودکان</span>
+            </a>
+            <a href="#products" class="category-card" onclick="filterProducts('electric')">
+                <div class="category-icon"><i class="fas fa-bolt"></i></div>
+                <span class="category-name">برقی</span>
+            </a>
+            <a href="#products" class="category-card" onclick="filterProducts('bmx')">
+                <div class="category-icon"><i class="fas fa-trophy"></i></div>
+                <span class="category-name">BMX</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PRODUCTS SECTION ===== -->
+<section id="products" class="products-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">محصولات ما</span>
+            <h2 class="section-title">جدیدترین دوچرخه‌ها</h2>
+            <p class="section-desc">بهترین برندهای ایرانی و خارجی با قیمت مناسب</p>
+        </div>
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all"   onclick="filterProducts('all')">همه</button>
+            <button class="filter-btn" data-filter="mountain" onclick="filterProducts('mountain')">کوهستانی</button>
+            <button class="filter-btn" data-filter="road"     onclick="filterProducts('road')">جاده‌ای</button>
+            <button class="filter-btn" data-filter="city"     onclick="filterProducts('city')">شهری</button>
+            <button class="filter-btn" data-filter="kids"     onclick="filterProducts('kids')">کودکان</button>
+            <button class="filter-btn" data-filter="electric" onclick="filterProducts('electric')">برقی</button>
+        </div>
+        <div class="products-grid" id="productsGrid">
+
+            <!-- Product 1 -->
+            <div class="product-card" data-category="mountain">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/986efb5668a680b2fe91f600b8228f0f6b6ea30b_1780750192.jpg"
+                         alt="دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX" loading="lazy">
+                    <span class="product-badge badge-new">جدید</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m1')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کوهستانی</span>
+                    <h3 class="product-name">دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۴۸)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۱۸,۵۰۰,۰۰۰</span>
+                        <span class="price-new">۱۵,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('اورلورد ۲۷۰۱-ATX', 15900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="road">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/193e58796bf4f1969515e1fae6ae5a2d80e8d573_1780747233.jpg"
+                         alt="دوچرخه کوهستانی اورلورد ۲۶۰۱-ATX" loading="lazy">
+                    <span class="product-badge badge-sale">تخفیف</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m2')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کوهستانی</span>
+                    <h3 class="product-name">دوچرخه کوهستانی اورلورد ۲۶۰۱-ATX</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(۳۲)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۲۲,۰۰۰,۰۰۰</span>
+                        <span class="price-new">۱۹,۵۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('اورلورد ۲۶۰۱-ATX', 19500000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="city">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/053e0d1124dee7cd8c8c0e23eec0488b57959d64_1758535495.jpg"
+                         alt="دوچرخه شهری المپیا مدل G300" loading="lazy">
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m3')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">شهری</span>
+                    <h3 class="product-name">دوچرخه شهری المپیا مدل G300 تک‌سرعته</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۶۷)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۸,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('المپیا G300 شهری', 8900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/aa0804fd82ee011119ecac9ca09f53093a42272f_1755782003.jpg"
+                         alt="دوچرخه کودک اسپیو سایز ۱۶ اینچ" loading="lazy">
+                    <span class="product-badge badge-best">پرفروش</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m4')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک اسپیو مدل ESPIO سایز ۱۶</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۹۱)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۳,۵۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('اسپیو ESPIO کودک ۱۶', 3500000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="city">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/373209ac98b012cfa0d5fae92626098399fecbcd_1778002341.jpg"
+                         alt="دوچرخه تاشو سوپر گلد مدل ۹۹۰۰ آلومینیوم" loading="lazy">
+                    <span class="product-badge badge-new">جدید</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m5')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">تاشو / شهری</span>
+                    <h3 class="product-name">دوچرخه تاشو سوپرگلد فول آلومینیوم ۹۹۰۰</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(۲۵)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۱۲,۰۰۰,۰۰۰</span>
+                        <span class="price-new">۹,۸۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('تاشو سوپرگلد ۹۹۰۰', 9800000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="mountain">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/a504f3e0be56c71e61b848047322672c9bf60d93_1754247481.jpg"
+                         alt="دوچرخه کوهستانی المپیا مدل Summer 024" loading="lazy">
+                    <span class="product-badge badge-sale">تخفیف</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m6')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کوهستانی</span>
+                    <h3 class="product-name">دوچرخه کوهستانی المپیا Summer 024 سایز ۲۴</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۳۸)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۲۷,۵۰۰,۰۰۰</span>
+                        <span class="price-new">۲۲,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('المپیا Summer 024', 22900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-category="road">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/2e149dd6d9ea47f71bc46361aad14f075443a347_1760973518.jpg"
+                         alt="دوچرخه کوهستان SMR دنده شیمانو ۲۶ اینچ" loading="lazy">
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m7')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کوهستانی</span>
+                    <h3 class="product-name">دوچرخه کوهستان SMR دنده شیمانو آلومینیوم ۲۶</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(۱۹)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۱۴,۵۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('SMR کوهستان شیمانو ۲۶', 14500000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card" data-category="city">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/e0ecfaf0338cbc1f64e0ef8fd21c027cd4c2e4df_1612858918.jpg"
+                         alt="دوچرخه کوهستان کراس مدل METEORIDER" loading="lazy">
+                    <span class="product-badge badge-best">پرفروش</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m8')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کوهستانی</span>
+                    <h3 class="product-name">دوچرخه کوهستان کراس مدل METEORIDER سایز ۱۶</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۵۲)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۱۴,۰۰۰,۰۰۰</span>
+                        <span class="price-new">۱۱,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('کراس METEORIDER کوهستان', 11900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 1 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/07cbc5e2a781bb85f9b19f9649e9d26c29a431a8_1754246627.jpg"
+                         alt="دوچرخه کودک پورت‌لاین چیچک ۲۰ صورتی" loading="lazy">
+                    <span class="product-badge badge-new">جدید</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m9')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک پورت‌لاین چیچک سایز ۲۰ صورتی</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۷۸)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۵,۵۰۰,۰۰۰</span>
+                        <span class="price-new">۴,۸۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('پورت‌لاین چیچک ۲۰ صورتی', 4800000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 2 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/e6543398d2086df91550e4488932e9ef35119c8d_1754246627.jpg"
+                         alt="دوچرخه کودک پورت‌لاین چیچک ۱۲ آبی" loading="lazy">
+                    <span class="product-badge badge-best">پرفروش</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m10')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک پورت‌لاین چیچک سایز ۱۲ آبی</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۱۱۲)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۳,۲۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('پورت‌لاین چیچک ۱۲ آبی', 3200000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 3 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/886ecdb50bbfc6b6a20a7d706a5b0ed6d31b9673_1754246626.jpg"
+                         alt="دوچرخه کودک پورت‌لاین چیچک ۱۲ بنفش" loading="lazy">
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m11')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک پورت‌لاین چیچک سایز ۱۲ بنفش</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(۵۴)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۳,۲۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('پورت‌لاین چیچک ۱۲ بنفش', 3200000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 4 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/cc8133066f9d988dd60bbd68ee83aac1f48ed4aa_1754246627.jpg"
+                         alt="دوچرخه کودک پورت‌لاین چیچک ۲۰ آبی" loading="lazy">
+                    <span class="product-badge badge-sale">تخفیف</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m12')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک پورت‌لاین چیچک سایز ۲۰ آبی</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۶۳)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۵,۵۰۰,۰۰۰</span>
+                        <span class="price-new">۴,۸۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('پورت‌لاین چیچک ۲۰ آبی', 4800000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 5 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/86d46934bd2c3a51928a02739d99872ca0949d5c_1778696311.jpg"
+                         alt="دوچرخه کودک شگندی دخترانه سایز ۱۲" loading="lazy">
+                    <span class="product-badge badge-new">جدید</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m13')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک شگندی دخترانه سایز ۱۲ اینچ</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۴۱)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۲,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('شگندی دخترانه ۱۲', 2900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 6 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/630f78724f61f4c14dd7b2cf108db3d200f2e295_1776534088.jpg"
+                         alt="دوچرخه کودک اینتنز BURST 195 سایز ۱۶" loading="lazy">
+                    <span class="product-badge badge-best">پرفروش</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m14')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک اینتنز BURST 195 سایز ۱۶ اینچ</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۸۷)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۴,۸۰۰,۰۰۰</span>
+                        <span class="price-new">۴,۱۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('اینتنز BURST 195 کودک ۱۶', 4100000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kids Product 7 -->
+            <div class="product-card" data-category="kids">
+                <div class="product-image-wrap">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/aa0804fd82ee011119ecac9ca09f53093a42272f_1755782003.jpg"
+                         alt="دوچرخه کودک اسپیو ESPIO سایز ۲۰ اینچ" loading="lazy">
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m15')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">کودکان</span>
+                    <h3 class="product-name">دوچرخه کودک اسپیو مدل ESPIO سایز ۲۰ اینچ</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(۳۵)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-old">۵,۲۰۰,۰۰۰</span>
+                        <span class="price-new">۴,۵۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('اسپیو ESPIO کودک ۲۰', 4500000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
+        </div><!-- end products-grid -->
+        <div class="view-all-wrap">
+            <a href="#contact" class="btn btn-outline-green">مشاهده همه محصولات</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BANNER SECTION ===== -->
+<section class="banner-section">
+    <div class="container">
+        <div class="banner-grid">
+            <div class="banner-item banner-large">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/28b49761a588953e9a6400b0c84868a9c726b1fe_1762848444.jpg"
+                     alt="دوچرخه کوهستان بلست مستر ۲۹ اینچ">
+                <div class="banner-content">
+                    <span class="banner-tag">آفر ویژه</span>
+                    <h3>تا ۳۰٪ تخفیف<br>دوچرخه‌های کوهستانی</h3>
+                    <a href="#products" class="btn btn-white" onclick="filterProducts('mountain')">همین الان بخرید</a>
+                </div>
+            </div>
+            <div class="banner-item banner-small">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/802b7ece0722e48c619bae29978b406081735f46_1763556733.jpg"
+                     alt="دوچرخه کوهستان مدل SPORT دیسکی ۲۷.۵ اینچ">
+                <div class="banner-content">
+                    <span class="banner-tag">لوازم جانبی</span>
+                    <h3>کامل‌ترین مجموعه لوازم</h3>
+                    <a href="#products" class="btn btn-white">مشاهده</a>
+                </div>
+            </div>
+            <div class="banner-item banner-small">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/a504f3e0be56c71e61b848047322672c9bf60d93_1754247481.jpg"
+                     alt="دوچرخه کوهستانی المپیا Summer 024">
+                <div class="banner-content">
+                    <span class="banner-tag">خدمات تعمیر</span>
+                    <h3>سرویس تخصصی دوچرخه</h3>
+                    <a href="#services" class="btn btn-white">رزرو کنید</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES SECTION ===== -->
+<section id="services" class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">خدمات پس از فروش</span>
+            <h2 class="section-title">ما در کنار شما هستیم</h2>
+            <p class="section-desc">خدمات تخصصی دوچرخه با ضمانت کیفیت</p>
+        </div>
+        <div class="services-grid">
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="background:rgba(45,106,79,.12);color:#2D6A4F">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3 class="service-title">تعمیر و سرویس</h3>
+                <p class="service-desc">سرویس کامل دوچرخه شامل تنظیم دنده، ترمز، روغن‌کاری و بررسی کامل توسط تکنسین‌های متخصص</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check"></i> سرویس ادواری</li>
+                    <li><i class="fas fa-check"></i> تعویض قطعات فرسوده</li>
+                    <li><i class="fas fa-check"></i> تنظیم سیستم انتقال قدرت</li>
+                </ul>
+                <a href="#contact" class="btn-service">رزرو نوبت</a>
+            </div>
+
+            <div class="service-card service-featured">
+                <span class="service-popular-badge">محبوب‌ترین</span>
+                <div class="service-icon-wrap" style="background:rgba(247,127,0,.12);color:#F77F00">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="service-title">گارانتی و ضمانت</h3>
+                <p class="service-desc">تمامی محصولات با ضمانت‌نامه معتبر ۲ ساله ارائه می‌شوند و خدمات گارانتی رایگان است</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check"></i> ضمانت ۲ ساله اجزا</li>
+                    <li><i class="fas fa-check"></i> تعویض رایگان قطعات معیوب</li>
+                    <li><i class="fas fa-check"></i> پشتیبانی ۲۴ ساعته</li>
+                </ul>
+                <a href="#contact" class="btn-service btn-service-accent">اطلاعات بیشتر</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="background:rgba(21,101,192,.12);color:#1565C0">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3 class="service-title">ارسال و تحویل</h3>
+                <p class="service-desc">ارسال رایگان به سراسر ایران برای سفارش‌های بالای ۵ میلیون تومان با بسته‌بندی ایمن</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check"></i> ارسال رایگان تهران</li>
+                    <li><i class="fas fa-check"></i> ارسال به سراسر ایران</li>
+                    <li><i class="fas fa-check"></i> بسته‌بندی تخصصی</li>
+                </ul>
+                <a href="#contact" class="btn-service">جزئیات ارسال</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="background:rgba(106,27,154,.12);color:#6A1B9A">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="service-title">آموزش دوچرخه‌سواری</h3>
+                <p class="service-desc">کلاس‌های آموزشی برای مبتدیان تا حرفه‌ای‌ها با مربیان مجرب فدراسیون دوچرخه‌سواری</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check"></i> آموزش مقدماتی</li>
+                    <li><i class="fas fa-check"></i> آموزش کوهستان</li>
+                    <li><i class="fas fa-check"></i> دوره‌های گروهی</li>
+                </ul>
+                <a href="#contact" class="btn-service">ثبت‌نام</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="background:rgba(183,28,28,.12);color:#B71C1C">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3 class="service-title">تعویض و مرجوعی</h3>
+                <p class="service-desc">امکان مرجوع کردن کالا تا ۷ روز بعد از خرید بدون هیچ توضیحی و استرداد وجه کامل</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check"></i> مرجوعی ۷ روزه</li>
+                    <li><i class="fas fa-check"></i> استرداد کامل وجه</li>
+                    <li><i class="fas fa-check"></i> تعویض بدون دردسر</li>
+                </ul>
+                <a href="#contact" class="btn-service">شرایط مرجوعی</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-wrap" style="background:rgba(0,131,143,.12);color:#00838F">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3 class="service-title">اقساط و تسهیلات</h3>
+                <p class="service-desc">خرید اقساطی با شرایط ویژه تا ۲۴ ماهه بدون بهره با همکاری بانک‌های معتبر کشور</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check"></i> اقساط تا ۲۴ ماهه</li>
+                    <li><i class="fas fa-check"></i> بدون بهره</li>
+                    <li><i class="fas fa-check"></i> تسویه آنلاین</li>
+                </ul>
+                <a href="#contact" class="btn-service">شرایط اقساط</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY US SECTION ===== -->
+<section class="why-us-section">
+    <div class="container">
+        <div class="why-us-flex">
+            <div class="why-us-image-wrap">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/2e149dd6d9ea47f71bc46361aad14f075443a347_1760973518.jpg"
+                     alt="دوچرخه کوهستان SMR شیمانو" class="why-us-img">
+                <div class="why-us-float-badge">
+                    <span class="badge-num">+۱۵</span>
+                    <span class="badge-text">سال تجربه</span>
+                </div>
+            </div>
+            <div class="why-us-content">
+                <span class="section-tag">چرا ما؟</span>
+                <h2 class="section-title">بهترین انتخاب برای<br><span class="text-accent">دوچرخه‌سواران</span></h2>
+                <p class="why-us-desc">
+                    دوچرخه‌سرا با بیش از <span class="text-highlight">۱۵ سال سابقه</span> در صنعت دوچرخه،
+                    تخصص، کیفیت و اعتماد را به مشتریان خود هدیه می‌دهد.
+                </p>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-medal"></i></div>
+                        <div class="feature-text">
+                            <h4>کیفیت تضمینی</h4>
+                            <p>تمام محصولات از برندهای معتبر با گواهینامه بین‌المللی</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-tag"></i></div>
+                        <div class="feature-text">
+                            <h4>بهترین قیمت</h4>
+                            <p>قیمت‌های رقابتی با تضمین پایین‌ترین قیمت در بازار</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <div class="feature-text">
+                            <h4>پشتیبانی ۲۴/۷</h4>
+                            <p>تیم متخصص ما آماده پاسخگویی به سوالات شما است</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                        <div class="feature-text">
+                            <h4>تحویل سریع</h4>
+                            <p>تحویل در کمتر از ۴۸ ساعت در تهران و ۷۲ ساعت در شهرستان</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">نظرات مشتریان</span>
+            <h2 class="section-title">مشتریان ما چه می‌گویند؟</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"دوچرخه کوهستانی که خریدم فوق‌العاده است. کیفیت عالی و قیمت منصفانه. پشتیبانی هم بی‌نظیر بود."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user-circle"></i></div>
+                    <div class="author-info">
+                        <span class="author-name">علی محمدی</span>
+                        <span class="author-title">خریدار دوچرخه کوهستانی</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"بهترین فروشگاه دوچرخه که تاکنون دیدم. تنوع محصول عالی، قیمت مناسب و ارسال بسیار سریع."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user-circle"></i></div>
+                    <div class="author-info">
+                        <span class="author-name">مریم رضایی</span>
+                        <span class="author-title">خریدار دوچرخه شهری</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★☆</div>
+                <p class="testimonial-text">"خدمات پس از فروش بسیار خوب است. بعد از ۶ ماه مشکلی پیش آمد و تیم پشتیبانی سریعاً حلش کرد."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user-circle"></i></div>
+                    <div class="author-info">
+                        <span class="author-name">حسین کریمی</span>
+                        <span class="author-title">خریدار دوچرخه جاده‌ای</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about" class="about-section">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-content">
+                <span class="section-tag">درباره ما</span>
+                <h2 class="section-title">داستان <span class="text-accent">دوچرخه‌سرا</span></h2>
+                <p class="about-text">
+                    دوچرخه‌سرا در سال <span class="text-highlight">۱۳۸۸</span> با هدف ارائه بهترین تجربه
+                    دوچرخه‌سواری به مردم ایران تأسیس شد. ما با داشتن بیش از ۱۵ سال تجربه در این صنعت،
+                    توانسته‌ایم اعتماد هزاران مشتری را کسب کنیم.
+                </p>
+                <p class="about-text">
+                    ماموریت ما ارائه باکیفیت‌ترین دوچرخه‌ها با قیمت‌های منصفانه است، همراه با
+                    خدمات پس از فروش ممتاز که تجربه خرید شما را لذت‌بخش کند.
+                </p>
+                <div class="about-stats-grid">
+                    <div class="about-stat">
+                        <span class="about-stat-num">+۱۵</span>
+                        <span class="about-stat-label">سال تجربه</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-num">+۵۰۰</span>
+                        <span class="about-stat-label">محصول</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-num">+۱۰۰۰۰</span>
+                        <span class="about-stat-label">مشتری</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-num">+۲۰</span>
+                        <span class="about-stat-label">نمایندگی</span>
+                    </div>
+                </div>
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> تماس با ما
+                </a>
+            </div>
+            <div class="about-images">
+                <div class="about-img-main">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/986efb5668a680b2fe91f600b8228f0f6b6ea30b_1780750192.jpg"
+                         alt="دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX">
+                </div>
+                <div class="about-img-secondary">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/802b7ece0722e48c619bae29978b406081735f46_1763556733.jpg"
+                         alt="دوچرخه کوهستان SPORT دیسکی ۲۷.۵">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== REPRESENTATIVES SECTION ===== -->
+<section id="representatives" class="representatives-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">نمایندگی‌ها</span>
+            <h2 class="section-title">شعب و نمایندگی‌های ما</h2>
+            <p class="section-desc">در شهرهای مختلف ایران در کنار شما هستیم</p>
+        </div>
+        <div class="reps-filter">
+            <button class="rep-filter-btn active" data-region="all"     onclick="filterReps('all')">همه</button>
+            <button class="rep-filter-btn" data-region="tehran"  onclick="filterReps('tehran')">تهران</button>
+            <button class="rep-filter-btn" data-region="north"   onclick="filterReps('north')">شمال</button>
+            <button class="rep-filter-btn" data-region="central" onclick="filterReps('central')">مرکزی</button>
+            <button class="rep-filter-btn" data-region="south"   onclick="filterReps('south')">جنوب</button>
+            <button class="rep-filter-btn" data-region="east"    onclick="filterReps('east')">شرق</button>
+            <button class="rep-filter-btn" data-region="west"    onclick="filterReps('west')">غرب</button>
+        </div>
+        <div class="reps-grid" id="repsGrid">
+
+            <div class="rep-card" data-region="tehran">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">تهران — شعبه مرکزی</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ ولیعصر، بالاتر از پارک ساعی، پ ۱۲۵</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۲۱-۸۸۷۶۵۴۳۲</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۹ الی ۲۱</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">تعمیر</span><span class="rep-tag">آموزش</span>
+                </div>
+                <a href="tel:02188765432" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="tehran">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">تهران — شعبه غرب</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> بلوار آیت‌الله کاشانی، نبش خ تیراژه، پ ۷۸</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۲۱-۴۴۳۲۱۱۰۰</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۹ الی ۲۰</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">تعمیر</span>
+                </div>
+                <a href="tel:02144321100" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="tehran">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">تهران — شعبه شرق</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ شریعتی، نزدیک میدان قدس، پ ۲۳۴</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۲۱-۲۲۴۵۶۷۸۹</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا جمعه: ۱۰ الی ۲۱</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">آموزش</span>
+                </div>
+                <a href="tel:02122456789" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="north">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">مشهد</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> بلوار وکیل‌آباد، نبش خ دانشگاه، پ ۵۶</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۵۱-۳۸۷۶۵۴۳۲</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۹ الی ۱۹</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">تعمیر</span>
+                </div>
+                <a href="tel:05138765432" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="north">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">رشت</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ لاکانی، جنب فروشگاه رفاه، پ ۳۴</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۱۳-۳۳۴۵۶۷۸۹</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۹ الی ۱۸</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span>
+                </div>
+                <a href="tel:01333456789" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="central">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">اصفهان</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ چهارباغ بالا، نزدیک پل تاریخی، پ ۱۲</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۳۱-۳۲۱۰۰۰۰۰</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۹ الی ۲۰</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">تعمیر</span><span class="rep-tag">آموزش</span>
+                </div>
+                <a href="tel:03132100000" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="south">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">شیراز</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ زند، جنب بانک ملی مرکزی، پ ۸۹</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۷۱-۳۲۳۴۵۶۷۸</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۸ الی ۱۸</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">تعمیر</span>
+                </div>
+                <a href="tel:07132345678" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="west">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">تبریز</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ ولیعصر، مقابل پاساژ ستاره، پ ۴۵</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۴۱-۳۵۶۷۸۹۰۱</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۹ الی ۱۹</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span><span class="rep-tag">تعمیر</span>
+                </div>
+                <a href="tel:04135678901" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+            <div class="rep-card" data-region="east">
+                <div class="rep-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                <h3 class="rep-city">کرمان</h3>
+                <p class="rep-address"><i class="fas fa-location-dot"></i> خ شهید مطهری، جنب پارک شهر، پ ۲۸</p>
+                <p class="rep-phone"><i class="fas fa-phone"></i> ۰۳۴-۳۲۴۵۶۷۸۹</p>
+                <p class="rep-hours"><i class="fas fa-clock"></i> شنبه تا پنجشنبه: ۸:۳۰ الی ۱۸</p>
+                <div class="rep-tags">
+                    <span class="rep-tag">فروش</span>
+                </div>
+                <a href="tel:03432456789" class="btn-rep-contact"><i class="fas fa-phone"></i> تماس</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">ارتباط با ما</span>
+            <h2 class="section-title">با ما در تماس باشید</h2>
+            <p class="section-desc">سوال دارید؟ ما اینجاییم تا کمک کنیم</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-form-wrap">
+                <h3>ارسال پیام</h3>
+                <form class="contact-form" id="contactForm" onsubmit="submitForm(event)" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">نام</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="نام شما" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">نام خانوادگی</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="نام خانوادگی" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">ایمیل</label>
+                        <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">شماره تماس</label>
+                        <input type="tel" id="phone" name="phone" placeholder="۰۹۱۲۳۴۵۶۷۸۹">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">موضوع</label>
+                        <select id="subject" name="subject">
+                            <option value="">انتخاب کنید</option>
+                            <option value="purchase">مشاوره خرید</option>
+                            <option value="service">خدمات پس از فروش</option>
+                            <option value="complaint">شکایت</option>
+                            <option value="other">سایر</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">پیام</label>
+                        <textarea id="message" name="message" rows="5" placeholder="پیام خود را بنویسید..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> ارسال پیام
+                    </button>
+                </form>
+                <div id="formSuccess" class="form-success" style="display:none;">
+                    <i class="fas fa-check-circle"></i>
+                    پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.
+                </div>
+            </div>
+
+            <div class="contact-info-wrap">
+                <h3>اطلاعات تماس</h3>
+                <div class="contact-info-list">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-info-text">
+                            <strong>آدرس دفتر مرکزی</strong>
+                            <p>تهران، خ ولیعصر، بالاتر از پارک ساعی، پ ۱۲۵</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-info-text">
+                            <strong>تلفن تماس</strong>
+                            <p><a href="tel:02188765432">۰۲۱-۸۸۷۶۵۴۳۲</a></p>
+                            <p><a href="tel:02188765433">۰۲۱-۸۸۷۶۵۴۳۳</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info-text">
+                            <strong>ایمیل</strong>
+                            <p><a href="mailto:info@docharkhesara.ir">info@docharkhesara.ir</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-info-text">
+                            <strong>ساعات کاری</strong>
+                            <p>شنبه تا پنجشنبه: ۹ صبح تا ۹ شب</p>
+                            <p>جمعه: ۱۰ صبح تا ۶ عصر</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-section">
+                    <h4>ما را دنبال کنید</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" style="background:#E1306C" aria-label="اینستاگرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" style="background:#0088CC" aria-label="تلگرام">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" style="background:#25D366" aria-label="واتساپ">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-link" style="background:#1DA1F2" aria-label="توییتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#home" class="logo footer-logo">
+                    <i class="fas fa-bicycle logo-icon"></i>
+                    <span class="logo-text">دوچرخه‌<span class="logo-accent">سرا</span></span>
+                </a>
+                <p class="footer-desc">بزرگ‌ترین فروشگاه تخصصی دوچرخه در ایران با بیش از ۱۵ سال سابقه</p>
+                <div class="footer-badges">
+                    <span class="trust-badge"><i class="fas fa-shield-alt"></i> اینماد</span>
+                    <span class="trust-badge"><i class="fas fa-certificate"></i> تاییدیه صنفی</span>
+                </div>
+            </div>
+            <div class="footer-links-col">
+                <h4 class="footer-col-title">لینک‌های سریع</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">صفحه اصلی</a></li>
+                    <li><a href="#products">فروشگاه</a></li>
+                    <li><a href="#services">خدمات</a></li>
+                    <li><a href="#about">درباره ما</a></li>
+                    <li><a href="#representatives">نمایندگی‌ها</a></li>
+                    <li><a href="#contact">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-col">
+                <h4 class="footer-col-title">دسته‌بندی محصولات</h4>
+                <ul class="footer-links">
+                    <li><a href="#products" onclick="filterProducts('mountain')">دوچرخه کوهستانی</a></li>
+                    <li><a href="#products" onclick="filterProducts('road')">دوچرخه جاده‌ای</a></li>
+                    <li><a href="#products" onclick="filterProducts('city')">دوچرخه شهری</a></li>
+                    <li><a href="#products" onclick="filterProducts('kids')">دوچرخه کودکان</a></li>
+                    <li><a href="#products" onclick="filterProducts('electric')">دوچرخه برقی</a></li>
+                    <li><a href="#products">لوازم جانبی</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4 class="footer-col-title">خبرنامه</h4>
+                <p>برای دریافت آخرین اخبار و پیشنهادات ویژه عضو شوید</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" placeholder="ایمیل شما..." required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© ۱۴۰۳ دوچرخه‌سرا | تمام حقوق محفوظ است</p>
+            <div class="footer-bottom-links">
+                <a href="#">حریم خصوصی</a>
+                <a href="#">قوانین و مقررات</a>
+                <a href="#">نقشه سایت</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== MODALS ===== -->
+<div id="m1" class="modal" onclick="closeModal(event,'m1')">
+    <div class="modal-content">
+        <button class="modal-close" onclick="document.getElementById('m1').classList.remove('active')">&times;</button>
+        <div class="modal-body">
+            <img src="https://dkstatics-public.digikala.com/digikala-products/986efb5668a680b2fe91f600b8228f0f6b6ea30b_1780750192.jpg" alt="دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX">
+            <div class="modal-info">
+                <h3>دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX</h3>
+                <div class="modal-stars">★★★★★ <span>(۴۸ نظر)</span></div>
+                <p>دوچرخه کوهستانی حرفه‌ای برند اورلورد با فریم آلومینیوم سبک، سوسپانسیون پیشرفته و تایرهای ضخیم مناسب مسیرهای سخت.</p>
+                <ul class="modal-specs">
+                    <li><strong>فریم:</strong> آلومینیوم آلیاژی سبک</li>
+                    <li><strong>دنده:</strong> شیمانو ۲۱ سرعته</li>
+                    <li><strong>ترمز:</strong> دیسکی مکانیکی</li>
+                    <li><strong>سایز چرخ:</strong> ۲۷.۵ اینچ</li>
+                </ul>
+                <div class="modal-price">۱۵,۹۰۰,۰۰۰ تومان</div>
+                <button class="btn btn-primary btn-full"
+                    onclick="addToCart('اورلورد ۲۷۰۱-ATX',15900000);document.getElementById('m1').classList.remove('active')">
+                    <i class="fas fa-cart-plus"></i> افزودن به سبد
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== CART SIDEBAR ===== -->
+<div id="cartOverlay" class="cart-overlay" onclick="toggleCart()"></div>
+<div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h3><i class="fas fa-shopping-cart"></i> سبد خرید</h3>
+        <button class="cart-close" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <div class="cart-empty">
+            <i class="fas fa-shopping-bag"></i>
+            <p>سبد خرید شما خالی است</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>جمع کل:</span>
+            <strong id="cartTotal">۰ تومان</strong>
+        </div>
+        <a href="#contact" class="btn btn-primary btn-full" onclick="toggleCart()">
+            <i class="fas fa-credit-card"></i> تکمیل خرید
+        </a>
+    </div>
+</div>
+
+<!-- ===== SCROLL TO TOP ===== -->
+<button id="scrollTop" class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="بازگشت به بالا">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+<!-- Bootstrap 5 Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
