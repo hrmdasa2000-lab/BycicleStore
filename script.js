@@ -3,7 +3,7 @@
 =================================================== */
 
 // ===== CART STATE =====
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('bicycleStoreCart') || '[]');
 
 // ===== STICKY HEADER =====
 const header = document.getElementById('header');
@@ -112,6 +112,7 @@ function renderCart() {
 
     const totalQty   = cart.reduce((s, i) => s + i.qty, 0);
     const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    localStorage.setItem('bicycleStoreCart', JSON.stringify(cart));
 
     badgeEl.textContent = totalQty;
 
