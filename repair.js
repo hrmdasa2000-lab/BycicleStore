@@ -5,6 +5,10 @@
     const STORAGE_KEY = 'bicycleStoreRepairRequests';
     const LAST_KEY = 'bicycleStoreLastRepairCode';
     const STATUSES = ['ثبت‌شده', 'بررسی اولیه', 'منتظر قطعه', 'درحال تعمیر', 'آماده تحویل'];
+    const localDateValue = (date = new Date()) => {
+        const offset = date.getTimezoneOffset() * 60000;
+        return new Date(date.getTime() - offset).toISOString().slice(0, 10);
+    };
     const panels = {
         booking: document.getElementById('bookingPanel'),
         tracking: document.getElementById('trackingPanel'),
@@ -21,7 +25,7 @@
         bikeType: 'کوهستان',
         serviceType: 'سرویس دوره‌ای',
         branch: 'تهران — ونک',
-        date: new Date().toISOString().slice(0, 10),
+        date: localDateValue(),
         notes: 'تنظیم ترمز، دنده و بررسی زنجیر',
         status: 'درحال تعمیر',
         estimate: 650000,
@@ -65,7 +69,13 @@
     }
 
     function saveRequests(requests) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
+            return true;
+        } catch {
+            showToast('ذخیره‌سازی مرورگر در دسترس نیست. فضای ذخیره‌سازی را بررسی کنید.');
+            return false;
+        }
     }
 
     function getAllRequests() {
@@ -132,7 +142,9 @@
                     <div><span>آخرین به‌روزرسانی</span><strong>${formatDate(request.updatedAt)}</strong></div>
                 </div>
             </article>`;
-        localStorage.setItem(LAST_KEY, request.code);
+        if (getRequests().some(item => item.code === request.code)) {
+            localStorage.setItem(LAST_KEY, request.code);
+        }
         updateReminder();
     }
 
@@ -228,7 +240,22 @@
     });
 
     const dateInput = document.getElementById('repairDate');
-    dateInput.min = new Date().toISOString().slice(0, 10);
+    dateInput.min = localDateValue();
+
+    const repairTabs = [...document.querySelectorAll('.repair-tab')];
+    repairTabs.forEach((tab, index) => {
+        tab.addEventListener('keydown', event => {
+            let nextIndex = null;
+            if (event.key === 'ArrowLeft') nextIndex = (index + 1) % repairTabs.length;
+            if (event.key === 'ArrowRight') nextIndex = (index - 1 + repairTabs.length) % repairTabs.length;
+            if (event.key === 'Home') nextIndex = 0;
+            if (event.key === 'End') nextIndex = repairTabs.length - 1;
+            if (nextIndex === null) return;
+            event.preventDefault();
+            repairTabs[nextIndex].focus();
+            repairTabs[nextIndex].click();
+        });
+    });
 
     document.getElementById('repairService').addEventListener('change', event => {
         const option = event.target.selectedOptions[0];
@@ -242,6 +269,12 @@
         event.preventDefault();
         const form = event.currentTarget;
         const formData = new FormData(form);
+        const fullName = String(formData.get('fullName')).trim();
+        if (fullName.length < 3) {
+            showToast('نام و نام خانوادگی را کامل وارد کنید.');
+            document.getElementById('repairFullName').focus();
+            return;
+        }
         const phone = toEnglishDigits(formData.get('phone')).replace(/\s|-/g, '');
         if (!/^09\d{9}$/.test(phone)) {
             showToast('شماره موبایل را به‌صورت صحیح وارد کنید.');
@@ -256,7 +289,7 @@
         const request = {
             id: `repair-${Date.now()}`,
             code,
-            fullName: String(formData.get('fullName')).trim(),
+            fullName,
             phone,
             bikeType: formData.get('bikeType'),
             serviceType: formData.get('serviceType'),
@@ -271,7 +304,7 @@
         };
 
         requests.unshift(request);
-        saveRequests(requests);
+        if (!saveRequests(requests)) return;
         localStorage.setItem(LAST_KEY, code);
         document.getElementById('newTrackingCode').textContent = code;
         document.getElementById('repairBookingSuccess').hidden = false;

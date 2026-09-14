@@ -1,4 +1,4 @@
-# Simple HTTP server using .NET HttpListener
+# Simple dependency-free HTTP server for local development
 param([int]$Port = 8080)
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -14,37 +14,52 @@ $mime = @{
     '.woff2'= 'font/woff2'
 }
 
-$listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add("http://localhost:$Port/")
+$listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, $Port)
 $listener.Start()
-Write-Host "Server running at http://localhost:$Port/" -ForegroundColor Green
+Write-Host "Server running at http://127.0.0.1:$Port/" -ForegroundColor Green
 Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow
 
 try {
-    while ($listener.IsListening) {
-        $ctx  = $listener.GetContext()
-        $req  = $ctx.Request
-        $resp = $ctx.Response
+    while ($true) {
+        $client = $listener.AcceptTcpClient()
+        try {
+            $stream = $client.GetStream()
+            $reader = [System.IO.StreamReader]::new($stream, [System.Text.Encoding]::ASCII, $false, 1024, $true)
+            $requestLine = $reader.ReadLine()
+            if ([string]::IsNullOrWhiteSpace($requestLine)) { continue }
+            while ($reader.ReadLine()) { }
 
-        $urlPath = $req.Url.LocalPath
-        if ($urlPath -eq '/') { $urlPath = '/index.html' }
+            $parts = $requestLine -split ' '
+            $urlPath = if ($parts.Length -ge 2) { [Uri]::UnescapeDataString(($parts[1] -split '\?')[0]) } else { '/' }
+            if ($urlPath -eq '/') { $urlPath = '/index.html' }
 
-        $filePath = Join-Path $root ($urlPath.TrimStart('/').Replace('/', '\'))
+            $rootPath = [System.IO.Path]::GetFullPath($root)
+            $filePath = [System.IO.Path]::GetFullPath((Join-Path $root ($urlPath.TrimStart('/').Replace('/', '\'))))
+            $allowed = $filePath.StartsWith($rootPath, [System.StringComparison]::OrdinalIgnoreCase)
 
-        if (Test-Path $filePath -PathType Leaf) {
-            $ext  = [System.IO.Path]::GetExtension($filePath).ToLower()
-            $ct   = if ($mime[$ext]) { $mime[$ext] } else { 'application/octet-stream' }
-            $bytes = [System.IO.File]::ReadAllBytes($filePath)
-            $resp.ContentType   = $ct
-            $resp.ContentLength64 = $bytes.Length
-            $resp.StatusCode    = 200
-            $resp.OutputStream.Write($bytes, 0, $bytes.Length)
-        } else {
-            $resp.StatusCode = 404
-            $body = [System.Text.Encoding]::UTF8.GetBytes('404 Not Found')
-            $resp.OutputStream.Write($body, 0, $body.Length)
+            if ($allowed -and (Test-Path -LiteralPath $filePath -PathType Leaf)) {
+                $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
+                $contentType = if ($mime[$ext]) { $mime[$ext] } else { 'application/octet-stream' }
+                $body = [System.IO.File]::ReadAllBytes($filePath)
+                $status = '200 OK'
+            } else {
+                $contentType = 'text/plain; charset=utf-8'
+                $body = [System.Text.Encoding]::UTF8.GetBytes('404 Not Found')
+                $status = '404 Not Found'
+            }
+
+            $header = "HTTP/1.1 $status`r`nContent-Type: $contentType`r`nContent-Length: $($body.Length)`r`nConnection: close`r`n`r`n"
+            $headerBytes = [System.Text.Encoding]::ASCII.GetBytes($header)
+            $stream.Write($headerBytes, 0, $headerBytes.Length)
+            if ($parts[0] -ne 'HEAD') {
+                $stream.Write($body, 0, $body.Length)
+            }
+            $stream.Flush()
+        } catch {
+            Write-Warning "Request failed: $($_.Exception.Message)"
+        } finally {
+            $client.Close()
         }
-        $resp.OutputStream.Close()
     }
 } finally {
     $listener.Stop()

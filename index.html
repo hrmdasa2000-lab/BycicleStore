@@ -4,22 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دوچرخه‌سرا | فروشگاه تخصصی دوچرخه</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
-    <!-- Tailwind CSS (preflight disabled to avoid Bootstrap conflict) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            corePlugins: { preflight: false },
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { green: '#2D6A4F', orange: '#F77F00', light: '#B7E4C7' }
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="repair.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -135,9 +119,9 @@
                 <div class="category-icon"><i class="fas fa-bolt"></i></div>
                 <span class="category-name">برقی</span>
             </a>
-            <a href="#products" class="category-card" onclick="filterProducts('bmx')">
-                <div class="category-icon"><i class="fas fa-trophy"></i></div>
-                <span class="category-name">BMX</span>
+            <a href="#products" class="category-card" onclick="filterProducts('all')">
+                <div class="category-icon"><i class="fas fa-border-all"></i></div>
+                <span class="category-name">همه مدل‌ها</span>
             </a>
         </div>
     </div>
@@ -586,10 +570,35 @@
                 </div>
             </div>
 
+            <!-- Electric Product -->
+            <div class="product-card" data-category="electric">
+                <div class="product-image-wrap">
+                    <img src="assets/electric-bike.svg"
+                         alt="دوچرخه برقی شهری E-Ride 500" loading="lazy">
+                    <span class="product-badge badge-new">برقی</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m16')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">برقی</span>
+                    <h3 class="product-name">دوچرخه برقی شهری E-Ride 500</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۲۴)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۴۲,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('دوچرخه برقی شهری E-Ride 500', 42900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
         </div><!-- end products-grid -->
-        <div class="view-all-wrap">
-            <a href="#contact" class="btn btn-outline-green">مشاهده همه محصولات</a>
-        </div>
     </div>
 </section>
 
@@ -603,7 +612,7 @@
                 <div class="banner-content">
                     <span class="banner-tag">آفر ویژه</span>
                     <h3>تا ۳۰٪ تخفیف<br>دوچرخه‌های کوهستانی</h3>
-                    <a href="#products" class="btn btn-white" onclick="filterProducts('mountain')">همین الان بخرید</a>
+                    <a href="#products" class="btn btn-white" data-product-filter="mountain">همین الان بخرید</a>
                 </div>
             </div>
             <div class="banner-item banner-small">
@@ -612,7 +621,9 @@
                 <div class="banner-content">
                     <span class="banner-tag">لوازم جانبی</span>
                     <h3>کامل‌ترین مجموعه لوازم</h3>
-                    <a href="#products" class="btn btn-white">مشاهده</a>
+                    <a href="#contact" class="btn btn-white"
+                       data-contact-subject="other"
+                       data-contact-message="برای خرید لوازم جانبی دوچرخه راهنمایی می‌خواهم.">درخواست لوازم جانبی</a>
                 </div>
             </div>
             <div class="banner-item banner-small">
@@ -621,7 +632,7 @@
                 <div class="banner-content">
                     <span class="banner-tag">خدمات تعمیر</span>
                     <h3>سرویس تخصصی دوچرخه</h3>
-                    <a href="#repair-center" class="btn btn-white">رزرو کنید</a>
+                    <a href="#repair-center" class="btn btn-white" data-repair-tab="booking">رزرو کنید</a>
                 </div>
             </div>
         </div>
@@ -815,7 +826,7 @@
                     <li><i class="fas fa-check"></i> تعویض قطعات فرسوده</li>
                     <li><i class="fas fa-check"></i> تنظیم سیستم انتقال قدرت</li>
                 </ul>
-                <a href="#repair-center" class="btn-service">رزرو نوبت</a>
+                <a href="#repair-center" class="btn-service" data-repair-tab="booking">رزرو نوبت</a>
             </div>
 
             <div class="service-card service-featured">
@@ -830,7 +841,9 @@
                     <li><i class="fas fa-check"></i> تعویض رایگان قطعات معیوب</li>
                     <li><i class="fas fa-check"></i> پشتیبانی ۲۴ ساعته</li>
                 </ul>
-                <a href="#contact" class="btn-service btn-service-accent">اطلاعات بیشتر</a>
+                <a href="#contact" class="btn-service btn-service-accent"
+                   data-contact-subject="service"
+                   data-contact-message="درباره شرایط گارانتی و استفاده از ضمانت محصول راهنمایی می‌خواهم.">اطلاعات بیشتر</a>
             </div>
 
             <div class="service-card">
@@ -844,7 +857,9 @@
                     <li><i class="fas fa-check"></i> ارسال به سراسر ایران</li>
                     <li><i class="fas fa-check"></i> بسته‌بندی تخصصی</li>
                 </ul>
-                <a href="#contact" class="btn-service">جزئیات ارسال</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="purchase"
+                   data-contact-message="درباره هزینه، زمان و شرایط ارسال دوچرخه راهنمایی می‌خواهم.">جزئیات ارسال</a>
             </div>
 
             <div class="service-card">
@@ -858,7 +873,9 @@
                     <li><i class="fas fa-check"></i> آموزش کوهستان</li>
                     <li><i class="fas fa-check"></i> دوره‌های گروهی</li>
                 </ul>
-                <a href="#contact" class="btn-service">ثبت‌نام</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="other"
+                   data-contact-message="برای ثبت‌نام کلاس آموزش دوچرخه‌سواری راهنمایی می‌خواهم.">ثبت‌نام</a>
             </div>
 
             <div class="service-card">
@@ -872,7 +889,9 @@
                     <li><i class="fas fa-check"></i> استرداد کامل وجه</li>
                     <li><i class="fas fa-check"></i> تعویض بدون دردسر</li>
                 </ul>
-                <a href="#contact" class="btn-service">شرایط مرجوعی</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="complaint"
+                   data-contact-message="درباره شرایط تعویض یا مرجوعی کالا راهنمایی می‌خواهم.">شرایط مرجوعی</a>
             </div>
 
             <div class="service-card">
@@ -886,7 +905,9 @@
                     <li><i class="fas fa-check"></i> بدون بهره</li>
                     <li><i class="fas fa-check"></i> تسویه آنلاین</li>
                 </ul>
-                <a href="#contact" class="btn-service">شرایط اقساط</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="purchase"
+                   data-contact-message="درباره شرایط خرید اقساطی و مدارک موردنیاز راهنمایی می‌خواهم.">شرایط اقساط</a>
             </div>
 
         </div>
@@ -1186,7 +1207,7 @@
         <div class="contact-grid">
             <div class="contact-form-wrap">
                 <h3>ارسال پیام</h3>
-                <form class="contact-form" id="contactForm" onsubmit="submitForm(event)" novalidate>
+                <form class="contact-form" id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">نام</label>
@@ -1325,7 +1346,7 @@
             <div class="footer-newsletter">
                 <h4 class="footer-col-title">خبرنامه</h4>
                 <p>برای دریافت آخرین اخبار و پیشنهادات ویژه عضو شوید</p>
-                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <form class="newsletter-form" id="newsletterForm">
                     <input type="email" placeholder="ایمیل شما..." required>
                     <button type="submit"><i class="fas fa-paper-plane"></i></button>
                 </form>
@@ -1345,7 +1366,7 @@
 <!-- ===== MODALS ===== -->
 <div id="m1" class="modal" onclick="closeModal(event,'m1')">
     <div class="modal-content">
-        <button class="modal-close" onclick="document.getElementById('m1').classList.remove('active')">&times;</button>
+        <button class="modal-close" type="button" aria-label="بستن" onclick="closeModalById('m1')">&times;</button>
         <div class="modal-body">
             <img src="https://dkstatics-public.digikala.com/digikala-products/986efb5668a680b2fe91f600b8228f0f6b6ea30b_1780750192.jpg" alt="دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX">
             <div class="modal-info">
@@ -1359,8 +1380,7 @@
                     <li><strong>سایز چرخ:</strong> ۲۷.۵ اینچ</li>
                 </ul>
                 <div class="modal-price">۱۵,۹۰۰,۰۰۰ تومان</div>
-                <button class="btn btn-primary btn-full"
-                    onclick="addToCart('اورلورد ۲۷۰۱-ATX',15900000);document.getElementById('m1').classList.remove('active')">
+                <button class="btn btn-primary btn-full" type="button">
                     <i class="fas fa-cart-plus"></i> افزودن به سبد
                 </button>
             </div>
@@ -1402,7 +1422,5 @@
 
 <script src="script.js"></script>
 <script src="repair.js"></script>
-<!-- Bootstrap 5 Bundle JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
