@@ -1,0 +1,12 @@
+{
+  "name": "bicycle-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Persian bicycle store and repair-service frontend demo",
+  "scripts": {
+    "test": "node tests/e2e.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

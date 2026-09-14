@@ -4,23 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دوچرخه‌سرا | فروشگاه تخصصی دوچرخه</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
-    <!-- Tailwind CSS (preflight disabled to avoid Bootstrap conflict) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            corePlugins: { preflight: false },
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { green: '#2D6A4F', orange: '#F77F00', light: '#B7E4C7' }
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="repair.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -37,6 +22,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home"    class="nav-link">خانه</a></li>
                 <li><a href="#products" class="nav-link">فروش</a></li>
+                <li><a href="#repair-center" class="nav-link nav-link-service">سامانه تعمیرات</a></li>
                 <li><a href="#services" class="nav-link">خدمات پس از فروش</a></li>
                 <li><a href="#about"   class="nav-link">درباره ما</a></li>
                 <li><a href="#representatives" class="nav-link">نمایندگی‌ها</a></li>
@@ -74,6 +60,9 @@
         <div class="hero-buttons">
             <a href="#products" class="btn btn-primary">
                 <i class="fas fa-store"></i> مشاهده محصولات
+            </a>
+            <a href="#repair-center" class="btn btn-service-hero">
+                <i class="fas fa-screwdriver-wrench"></i> رزرو تعمیر
             </a>
             <a href="#about" class="btn btn-outline-white">
                 <i class="fas fa-info-circle"></i> درباره ما
@@ -130,9 +119,9 @@
                 <div class="category-icon"><i class="fas fa-bolt"></i></div>
                 <span class="category-name">برقی</span>
             </a>
-            <a href="#products" class="category-card" onclick="filterProducts('bmx')">
-                <div class="category-icon"><i class="fas fa-trophy"></i></div>
-                <span class="category-name">BMX</span>
+            <a href="#products" class="category-card" onclick="filterProducts('all')">
+                <div class="category-icon"><i class="fas fa-border-all"></i></div>
+                <span class="category-name">همه مدل‌ها</span>
             </a>
         </div>
     </div>
@@ -581,10 +570,35 @@
                 </div>
             </div>
 
+            <!-- Electric Product -->
+            <div class="product-card" data-category="electric">
+                <div class="product-image-wrap">
+                    <img src="assets/electric-bike.svg"
+                         alt="دوچرخه برقی شهری E-Ride 500" loading="lazy">
+                    <span class="product-badge badge-new">برقی</span>
+                    <div class="product-overlay">
+                        <button class="btn-quick-view" onclick="openModal('m16')">
+                            <i class="fas fa-eye"></i> مشاهده سریع
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category-tag">برقی</span>
+                    <h3 class="product-name">دوچرخه برقی شهری E-Ride 500</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(۲۴)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <span class="price-new">۴۲,۹۰۰,۰۰۰ <small>تومان</small></span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('دوچرخه برقی شهری E-Ride 500', 42900000)">
+                        <i class="fas fa-cart-plus"></i> افزودن به سبد
+                    </button>
+                </div>
+            </div>
+
         </div><!-- end products-grid -->
-        <div class="view-all-wrap">
-            <a href="#contact" class="btn btn-outline-green">مشاهده همه محصولات</a>
-        </div>
     </div>
 </section>
 
@@ -598,7 +612,7 @@
                 <div class="banner-content">
                     <span class="banner-tag">آفر ویژه</span>
                     <h3>تا ۳۰٪ تخفیف<br>دوچرخه‌های کوهستانی</h3>
-                    <a href="#products" class="btn btn-white" onclick="filterProducts('mountain')">همین الان بخرید</a>
+                    <a href="#products" class="btn btn-white" data-product-filter="mountain">همین الان بخرید</a>
                 </div>
             </div>
             <div class="banner-item banner-small">
@@ -607,7 +621,9 @@
                 <div class="banner-content">
                     <span class="banner-tag">لوازم جانبی</span>
                     <h3>کامل‌ترین مجموعه لوازم</h3>
-                    <a href="#products" class="btn btn-white">مشاهده</a>
+                    <a href="#contact" class="btn btn-white"
+                       data-contact-subject="other"
+                       data-contact-message="برای خرید لوازم جانبی دوچرخه راهنمایی می‌خواهم.">درخواست لوازم جانبی</a>
                 </div>
             </div>
             <div class="banner-item banner-small">
@@ -616,9 +632,175 @@
                 <div class="banner-content">
                     <span class="banner-tag">خدمات تعمیر</span>
                     <h3>سرویس تخصصی دوچرخه</h3>
-                    <a href="#services" class="btn btn-white">رزرو کنید</a>
+                    <a href="#repair-center" class="btn btn-white" data-repair-tab="booking">رزرو کنید</a>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== REPAIR SERVICE SYSTEM ===== -->
+<section id="repair-center" class="repair-center-section">
+    <div class="container">
+        <div class="repair-hero">
+            <div class="repair-hero-copy">
+                <span class="repair-eyebrow"><i class="fas fa-circle-check"></i> پذیرش آنلاین، پیگیری شفاف</span>
+                <h2>دوچرخه‌ات را به مسیر برگردان</h2>
+                <p>نوبت تعمیر را آنلاین ثبت کن، هزینه اولیه را ببین و با یک کد اختصاصی از پذیرش تا تحویل، وضعیت سرویس را پیگیری کن.</p>
+                <div class="repair-hero-actions">
+                    <button class="btn btn-primary" type="button" data-repair-tab="booking">
+                        <i class="fas fa-calendar-check"></i> رزرو نوبت
+                    </button>
+                    <button class="btn btn-repair-ghost" type="button" data-repair-tab="tracking">
+                        <i class="fas fa-location-crosshairs"></i> پیگیری تعمیر
+                    </button>
+                </div>
+            </div>
+            <div class="repair-quick-stats" aria-label="مزایای سامانه تعمیرات">
+                <div><strong>۶</strong><span>خدمت تخصصی</span></div>
+                <div><strong>۴</strong><span>مرکز فعال</span></div>
+                <div><strong>شفاف</strong><span>برآورد هزینه</span></div>
+            </div>
+        </div>
+
+        <div class="repair-shell">
+            <div class="repair-tabs" role="tablist" aria-label="بخش‌های سامانه تعمیرات">
+                <button class="repair-tab active" id="bookingTab" type="button" role="tab" aria-selected="true" aria-controls="bookingPanel" data-repair-tab="booking">
+                    <i class="fas fa-calendar-plus"></i><span>ثبت درخواست</span>
+                </button>
+                <button class="repair-tab" id="trackingTab" type="button" role="tab" aria-selected="false" aria-controls="trackingPanel" data-repair-tab="tracking">
+                    <i class="fas fa-magnifying-glass-location"></i><span>پیگیری وضعیت</span>
+                </button>
+                <button class="repair-tab" id="adminTab" type="button" role="tab" aria-selected="false" aria-controls="adminPanel" data-repair-tab="admin">
+                    <i class="fas fa-user-gear"></i><span>پنل تعمیرگاه</span>
+                </button>
+            </div>
+
+            <div class="repair-panel active" id="bookingPanel" role="tabpanel" aria-labelledby="bookingTab">
+                <div class="repair-panel-heading">
+                    <div>
+                        <span class="panel-kicker">کمتر از دو دقیقه</span>
+                        <h3>رزرو خدمات و تعمیرات</h3>
+                        <p>اطلاعات اولیه را وارد کن؛ پس از ثبت، کد پیگیری فوراً صادر می‌شود.</p>
+                    </div>
+                    <div class="estimate-card" aria-live="polite">
+                        <span>برآورد اولیه</span>
+                        <strong id="repairEstimate">انتخاب خدمت</strong>
+                        <small>مبلغ نهایی پس از بررسی فنی تأیید می‌شود.</small>
+                    </div>
+                </div>
+
+                <form id="repairBookingForm" class="repair-form">
+                    <div class="repair-form-grid">
+                        <div class="form-group">
+                            <label for="repairFullName">نام و نام خانوادگی</label>
+                            <input id="repairFullName" name="fullName" type="text" autocomplete="name" placeholder="مثلاً سارا احمدی" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="repairPhone">شماره موبایل</label>
+                            <input id="repairPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="۰۹۱۲۳۴۵۶۷۸۹" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="repairBikeType">نوع دوچرخه</label>
+                            <select id="repairBikeType" name="bikeType" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="کوهستان">کوهستان</option>
+                                <option value="شهری">شهری</option>
+                                <option value="جاده‌ای">جاده‌ای</option>
+                                <option value="برقی">برقی</option>
+                                <option value="کودک">کودک</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="repairService">نوع خدمت</label>
+                            <select id="repairService" name="serviceType" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="بازدید و عیب‌یابی" data-price="0">بازدید و عیب‌یابی — رایگان</option>
+                                <option value="سرویس دوره‌ای" data-price="650000">سرویس دوره‌ای — از ۶۵۰ هزار تومان</option>
+                                <option value="تنظیم ترمز و دنده" data-price="390000">تنظیم ترمز و دنده — از ۳۹۰ هزار تومان</option>
+                                <option value="پنچرگیری و تعویض تیوب" data-price="180000">پنچرگیری و تعویض تیوب — از ۱۸۰ هزار تومان</option>
+                                <option value="سرویس کمک‌فنر" data-price="890000">سرویس کمک‌فنر — از ۸۹۰ هزار تومان</option>
+                                <option value="بررسی سیستم برقی" data-price="1200000">بررسی سیستم برقی — از ۱.۲ میلیون تومان</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="repairBranch">مرکز خدمات</label>
+                            <select id="repairBranch" name="branch" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="تهران — ونک">تهران — ونک</option>
+                                <option value="تهران — صادقیه">تهران — صادقیه</option>
+                                <option value="کرج — عظیمیه">کرج — عظیمیه</option>
+                                <option value="اصفهان — چهارباغ">اصفهان — چهارباغ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="repairDate">تاریخ مراجعه</label>
+                            <input id="repairDate" name="date" type="date" required>
+                        </div>
+                        <div class="form-group repair-form-full">
+                            <label for="repairNotes">شرح مشکل</label>
+                            <textarea id="repairNotes" name="notes" rows="3" placeholder="مثلاً هنگام تعویض دنده صدا ایجاد می‌شود..."></textarea>
+                        </div>
+                    </div>
+                    <label class="repair-consent">
+                        <input type="checkbox" name="consent" required>
+                        <span>قوانین پذیرش و تماس برای هماهنگی نوبت را می‌پذیرم.</span>
+                    </label>
+                    <button class="btn btn-primary repair-submit" type="submit">
+                        <i class="fas fa-ticket"></i> ثبت درخواست و دریافت کد پیگیری
+                    </button>
+                </form>
+
+                <div id="repairBookingSuccess" class="repair-success" hidden aria-live="polite">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <div>
+                        <span>درخواست با موفقیت ثبت شد</span>
+                        <h3>کد پیگیری: <b id="newTrackingCode"></b></h3>
+                        <p>این کد را نگه دار. برای مشاهده وضعیت، مستقیم وارد بخش پیگیری شو.</p>
+                    </div>
+                    <button class="btn btn-primary" id="trackNewRequest" type="button">پیگیری درخواست</button>
+                </div>
+            </div>
+
+            <div class="repair-panel" id="trackingPanel" role="tabpanel" aria-labelledby="trackingTab" hidden>
+                <div class="repair-panel-heading compact">
+                    <div>
+                        <span class="panel-kicker">وضعیت لحظه‌ای</span>
+                        <h3>پیگیری درخواست تعمیر</h3>
+                        <p>کد صادرشده هنگام رزرو را وارد کن.</p>
+                    </div>
+                </div>
+                <form id="repairTrackingForm" class="tracking-form">
+                    <label class="sr-only" for="trackingCode">کد پیگیری</label>
+                    <input id="trackingCode" name="trackingCode" type="text" autocomplete="off" placeholder="مثلاً BS-1405-1234" required>
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> مشاهده وضعیت</button>
+                </form>
+                <p class="tracking-demo-note">برای مشاهده نمونه آماده، کد <button id="useDemoTracking" type="button">BS-DEMO-1405</button> را امتحان کن.</p>
+                <div id="trackingResult" class="tracking-result" hidden></div>
+            </div>
+
+            <div class="repair-panel" id="adminPanel" role="tabpanel" aria-labelledby="adminTab" hidden>
+                <div class="repair-panel-heading compact">
+                    <div>
+                        <span class="panel-kicker">نمایش قابلیت مدیریتی</span>
+                        <h3>صف درخواست‌های تعمیرگاه</h3>
+                        <p>وضعیت، هزینه و زمان تحویل هر درخواست را مدیریت کن.</p>
+                    </div>
+                    <span class="demo-badge"><i class="fas fa-flask"></i> پنل نمایشی</span>
+                </div>
+                <div class="admin-summary" id="repairAdminSummary"></div>
+                <div class="repair-admin-list" id="repairAdminList"></div>
+            </div>
+        </div>
+
+        <div class="service-reminder-card">
+            <div class="reminder-icon"><i class="fas fa-bell"></i></div>
+            <div>
+                <span>یادآوری سرویس بعدی</span>
+                <h3>نگهداری منظم، سواری مطمئن‌تر</h3>
+                <p id="serviceReminderText">پس از تحویل تعمیر، زمان سرویس بعدی در همین دستگاه ذخیره و نمایش داده می‌شود.</p>
+            </div>
+            <button class="btn btn-repair-ghost" id="viewLastRequest" type="button">آخرین درخواست من</button>
         </div>
     </div>
 </section>
@@ -644,7 +826,7 @@
                     <li><i class="fas fa-check"></i> تعویض قطعات فرسوده</li>
                     <li><i class="fas fa-check"></i> تنظیم سیستم انتقال قدرت</li>
                 </ul>
-                <a href="#contact" class="btn-service">رزرو نوبت</a>
+                <a href="#repair-center" class="btn-service" data-repair-tab="booking">رزرو نوبت</a>
             </div>
 
             <div class="service-card service-featured">
@@ -659,7 +841,9 @@
                     <li><i class="fas fa-check"></i> تعویض رایگان قطعات معیوب</li>
                     <li><i class="fas fa-check"></i> پشتیبانی ۲۴ ساعته</li>
                 </ul>
-                <a href="#contact" class="btn-service btn-service-accent">اطلاعات بیشتر</a>
+                <a href="#contact" class="btn-service btn-service-accent"
+                   data-contact-subject="service"
+                   data-contact-message="درباره شرایط گارانتی و استفاده از ضمانت محصول راهنمایی می‌خواهم.">اطلاعات بیشتر</a>
             </div>
 
             <div class="service-card">
@@ -673,7 +857,9 @@
                     <li><i class="fas fa-check"></i> ارسال به سراسر ایران</li>
                     <li><i class="fas fa-check"></i> بسته‌بندی تخصصی</li>
                 </ul>
-                <a href="#contact" class="btn-service">جزئیات ارسال</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="purchase"
+                   data-contact-message="درباره هزینه، زمان و شرایط ارسال دوچرخه راهنمایی می‌خواهم.">جزئیات ارسال</a>
             </div>
 
             <div class="service-card">
@@ -687,7 +873,9 @@
                     <li><i class="fas fa-check"></i> آموزش کوهستان</li>
                     <li><i class="fas fa-check"></i> دوره‌های گروهی</li>
                 </ul>
-                <a href="#contact" class="btn-service">ثبت‌نام</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="other"
+                   data-contact-message="برای ثبت‌نام کلاس آموزش دوچرخه‌سواری راهنمایی می‌خواهم.">ثبت‌نام</a>
             </div>
 
             <div class="service-card">
@@ -701,7 +889,9 @@
                     <li><i class="fas fa-check"></i> استرداد کامل وجه</li>
                     <li><i class="fas fa-check"></i> تعویض بدون دردسر</li>
                 </ul>
-                <a href="#contact" class="btn-service">شرایط مرجوعی</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="complaint"
+                   data-contact-message="درباره شرایط تعویض یا مرجوعی کالا راهنمایی می‌خواهم.">شرایط مرجوعی</a>
             </div>
 
             <div class="service-card">
@@ -715,7 +905,9 @@
                     <li><i class="fas fa-check"></i> بدون بهره</li>
                     <li><i class="fas fa-check"></i> تسویه آنلاین</li>
                 </ul>
-                <a href="#contact" class="btn-service">شرایط اقساط</a>
+                <a href="#contact" class="btn-service"
+                   data-contact-subject="purchase"
+                   data-contact-message="درباره شرایط خرید اقساطی و مدارک موردنیاز راهنمایی می‌خواهم.">شرایط اقساط</a>
             </div>
 
         </div>
@@ -1015,7 +1207,7 @@
         <div class="contact-grid">
             <div class="contact-form-wrap">
                 <h3>ارسال پیام</h3>
-                <form class="contact-form" id="contactForm" onsubmit="submitForm(event)" novalidate>
+                <form class="contact-form" id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">نام</label>
@@ -1154,7 +1346,7 @@
             <div class="footer-newsletter">
                 <h4 class="footer-col-title">خبرنامه</h4>
                 <p>برای دریافت آخرین اخبار و پیشنهادات ویژه عضو شوید</p>
-                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <form class="newsletter-form" id="newsletterForm">
                     <input type="email" placeholder="ایمیل شما..." required>
                     <button type="submit"><i class="fas fa-paper-plane"></i></button>
                 </form>
@@ -1174,7 +1366,7 @@
 <!-- ===== MODALS ===== -->
 <div id="m1" class="modal" onclick="closeModal(event,'m1')">
     <div class="modal-content">
-        <button class="modal-close" onclick="document.getElementById('m1').classList.remove('active')">&times;</button>
+        <button class="modal-close" type="button" aria-label="بستن" onclick="closeModalById('m1')">&times;</button>
         <div class="modal-body">
             <img src="https://dkstatics-public.digikala.com/digikala-products/986efb5668a680b2fe91f600b8228f0f6b6ea30b_1780750192.jpg" alt="دوچرخه کوهستانی اورلورد ۲۷۰۱-ATX">
             <div class="modal-info">
@@ -1188,8 +1380,7 @@
                     <li><strong>سایز چرخ:</strong> ۲۷.۵ اینچ</li>
                 </ul>
                 <div class="modal-price">۱۵,۹۰۰,۰۰۰ تومان</div>
-                <button class="btn btn-primary btn-full"
-                    onclick="addToCart('اورلورد ۲۷۰۱-ATX',15900000);document.getElementById('m1').classList.remove('active')">
+                <button class="btn btn-primary btn-full" type="button">
                     <i class="fas fa-cart-plus"></i> افزودن به سبد
                 </button>
             </div>
@@ -1230,7 +1421,6 @@
 <div id="toast" class="toast"></div>
 
 <script src="script.js"></script>
-<!-- Bootstrap 5 Bundle JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="repair.js"></script>
 </body>
 </html>

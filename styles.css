@@ -35,7 +35,7 @@
     margin: 0;
     padding: 0;
 }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
     font-family: 'Vazirmatn', 'Tahoma', sans-serif;
     background: var(--bg);
@@ -287,11 +287,11 @@ section { padding: 80px 0; }
     background:
         url('https://dkstatics-public.digikala.com/digikala-products/28b49761a588953e9a6400b0c84868a9c726b1fe_1762848444.jpg')
         center/cover no-repeat;
-    transform: scale(1.04);
+    transform: none;
     transition: transform 8s ease;
     z-index: 0;
 }
-.hero:hover .hero-bg { transform: scale(1); }
+.hero:hover .hero-bg { transform: none; }
 .hero-overlay {
     position: absolute;         /* POSITION — absolute */
     inset: 0;
@@ -300,6 +300,7 @@ section { padding: 80px 0; }
         rgba(45,106,79,.72) 60%,
         rgba(82,183,136,.4) 100%);
     z-index: 1;
+    pointer-events: none;
 }
 .hero-content {
     position: relative;         /* POSITION */
@@ -627,11 +628,6 @@ section { padding: 80px 0; }
     border-color: var(--primary);
     transform: translateY(-1px);
 }
-.view-all-wrap {
-    text-align: center;
-    margin-top: 40px;
-}
-
 /* ======================================================
    BANNER — Grid
 ====================================================== */
@@ -1701,6 +1697,7 @@ section { padding: 80px 0; }
 @media (max-width: 768px) {
     :root { --header-h: 62px; }
     section { padding: 56px 0; }
+    .hero-bg, .hero:hover .hero-bg { transform: none; }
 
     .hero-title { font-size: 2rem; }
     .hero-subtitle { font-size: .95rem; }
